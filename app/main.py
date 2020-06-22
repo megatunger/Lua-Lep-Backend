@@ -27,6 +27,3 @@ def callSpeechToTextAPI(file_name):
     }
     response = requests.post('https://speech.googleapis.com/v1/speech:recognize?key='+API_KEY, headers=headers, data=json.dumps(data))
     return response.content, headers
-
-if __name__ == '__main__':
-    app.run()
