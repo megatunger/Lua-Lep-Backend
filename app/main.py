@@ -1,5 +1,5 @@
 import json
-from flask import Flask
+from flask import Flask, request
 from decouple import config
 import requests
 API_KEY = config('GOOGLE_STT_API_KEY')
@@ -27,3 +27,21 @@ def callSpeechToTextAPI(file_name):
     }
     response = requests.post('https://speech.googleapis.com/v1/speech:recognize?key='+API_KEY, headers=headers, data=json.dumps(data))
     return response.content, headers
+
+@app.route('/api/word', methods=['POST'])
+def checkWord():
+    passed = False
+    message = ""
+    word = request.args.get('word', None)
+    audio_file = request.args.get('audio_file', None)
+
+    if passed:
+        message = "Bạn đã đọc đúng ✅"
+    else:
+        message = "Mời bạn đọc lại ❗️"
+    return {
+        "word": word,
+        "accuracy": "100%",
+        "passed": passed,
+        "message": message
+    }
