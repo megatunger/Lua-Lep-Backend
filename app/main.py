@@ -30,7 +30,7 @@ def callSpeechToTextAPI(file_name):
 
 @app.route('/api/word', methods=['POST'])
 def checkWord():
-    passed = False
+    passed = True
     message = ""
     word = request.args.get('word', None)
     audio_file = request.args.get('audio_file', None)
