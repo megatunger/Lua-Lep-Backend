@@ -7,7 +7,7 @@ API_KEY = "AIzaSyDU1UwxBepNeDCEeydO7D0BdXLMMUptCdQ"
 
 app = Flask(__name__)
 
-def checksword(words_recognize, words):
+def check(words_recognize, words):
     for i, word in enumerate(words):
         word_recognize = words_recognize[i]
         if(word[0] != 'l' and word[0] != 'n'):
