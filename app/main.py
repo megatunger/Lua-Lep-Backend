@@ -1,12 +1,20 @@
 import json
 from flask import Flask, request
-from decouple import config
+import decouple
 import requests
 
-API_KEY = config('GOOGLE_STT_API_KEY')
+API_KEY = "AIzaSyDU1UwxBepNeDCEeydO7D0BdXLMMUptCdQ"
 
 app = Flask(__name__)
 
+def checksword(words_recognize, words):
+    for i, word in enumerate(words):
+        word_recognize = words_recognize[i]
+        if(word[0] != 'l' and word[0] != 'n'):
+            continue
+        if(word_recognize[0] != word[0] and word_recognize[1] != word[0] and word_recognize[2] != word[0]):
+            return False
+    return True
 
 @app.route('/')
 def welcome():
@@ -45,7 +53,7 @@ def checkWord():
     data = {
         "config": {
             "encoding": "LINEAR16",
-            "languageCode": "vi-VN",
+            "languageCode": "en-US",
             "sampleRateHertz": 44100
         },
         "audio": {
@@ -59,8 +67,12 @@ def checkWord():
     try:
         word_recognize = response.json().get('results')[0].get('alternatives')[0].get('transcript')
         confidence = response.json().get('results')[0].get('alternatives')[0].get('confidence')
-        if str(word_recognize) != word or confidence < 0.7:
+        word_recognize_split = str(word_recognize).split();
+        word_split = word.split();
+        if check(word_recognize_split, word_split) == False:
             passed = False
+        #if str(word_recognize) != word or confidence < 0.7:
+        #    passed = False
     except:
         passed = False
     if passed:
