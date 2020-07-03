@@ -44,3 +44,4 @@ Jinja2==2.11.2
 MarkupSafe==1.1.1
 SpeechRecognition==3.8.1
 Werkzeug==1.0.1
+pydub==0.24.1
