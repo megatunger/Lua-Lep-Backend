@@ -117,8 +117,9 @@ def callSpeechToTextAPI():
         response = {
             "passed": passed,
             "accuracy": accuracy,
-            "message": message
-        }
+            "message": message,
+            "words": [{"word": " ", "passed": False}]
+            }
         return response
     words = []
     for i, chunk in enumerate(audio_chunks):
