@@ -1,11 +1,9 @@
 import json
 from flask import Flask, request, send_from_directory
-import decouple
 import requests
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 import os
-import speech_recognition as sr
 import pyrebase
 
 API_KEY = "AIzaSyDU1UwxBepNeDCEeydO7D0BdXLMMUptCdQ"
